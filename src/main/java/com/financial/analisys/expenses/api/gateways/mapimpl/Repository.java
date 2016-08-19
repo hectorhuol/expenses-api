@@ -45,12 +45,22 @@ public final class Repository {
 	protected static final Map<String, User> usersRepository;
 
 	static {
-		cardsRepository = loadCardsRepository();
-		categoriesRepository = loadCategoriesRepository();
-		companionsRepository = loadCompanionsRepository();
-		expensesRepository = loadExpensesRepository();
-		usersRepository = loadUsersRepository();
 		loadProperties();
+		cardsRepository = getMapRepository(CARDS_REPOSITORY_NAME,
+				new TypeReference<Map<String, Card>>() {
+				});
+		categoriesRepository = getMapRepository(CATEGORIES_REPOSITORY_NAME,
+				new TypeReference<Map<String, Category>>() {
+				});
+		companionsRepository = getMapRepository(CATEGORIES_REPOSITORY_NAME,
+				new TypeReference<Map<String, Companion>>() {
+				});
+		expensesRepository = getMapRepository(EXPENSES_REPOSITORY_NAME,
+				new TypeReference<Map<String, Expense>>() {
+				});
+		usersRepository = getMapRepository(USERS_REPOSITORY_NAME,
+				new TypeReference<Map<String, User>>() {
+				});
 	}
 
 	private static void loadProperties() {
@@ -89,15 +99,16 @@ public final class Repository {
 		return repositoryProperties != null;
 	}
 
-	private static Map<String, Card> loadCardsRepository() {
-		Map<String, Card> map;
+	private static <T> Map<String, T> getMapRepository(String repositoryName,
+			TypeReference<Map<String, T>> typeReference) {
+		Map<String, T> map = null;
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(getFileDirectory(CARDS_REPOSITORY_NAME),
-					new TypeReference<Map<String, Card>>() {
-					});
-
-			if (map == null || map.isEmpty()) {
+			if (fileExists(repositoryName)) {
+				ObjectMapper mapper = new ObjectMapper();
+				map = mapper.readValue(getFileDirectory(repositoryName),
+						typeReference);
+			} else {
+				
 				return new LinkedHashMap<>();
 			}
 
@@ -108,82 +119,8 @@ public final class Repository {
 		return map;
 	}
 
-	private static Map<String, Category> loadCategoriesRepository() {
-		Map<String, Category> map;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(
-					getFileDirectory(CATEGORIES_REPOSITORY_NAME),
-					new TypeReference<Map<String, Category>>() {
-					});
-
-			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<>();
-			}
-
-		} catch (Exception e) {
-			throw new TechnicalException(e);
-		}
-
-		return map;
-	}
-
-	private static Map<String, Companion> loadCompanionsRepository() {
-		Map<String, Companion> map;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(
-					getFileDirectory(COMPANIONS_REPOSITORY_NAME),
-					new TypeReference<Map<String, Companion>>() {
-					});
-
-			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<>();
-			}
-
-		} catch (Exception e) {
-			throw new TechnicalException(e);
-		}
-
-		return map;
-	}
-
-	private static Map<String, Expense> loadExpensesRepository() {
-		Map<String, Expense> map;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(getFileDirectory(EXPENSES_REPOSITORY_NAME),
-					new TypeReference<Map<String, Expense>>() {
-					});
-
-			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<>();
-			}
-
-		} catch (Exception e) {
-			throw new TechnicalException(e);
-		}
-
-		return map;
-	}
-
-	private static Map<String, User> loadUsersRepository() {
-		Map<String, User> map;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(getFileDirectory(USERS_REPOSITORY_NAME),
-					new TypeReference<Map<String, User>>() {
-					});
-
-			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<>();
-			}
-
-		} catch (Exception e) {
-			throw new TechnicalException(e);
-		}
-
-		return map;
+	private static boolean fileExists(String fileName) {
+		return new File(REPOSITORIES_PATH + fileName).exists();
 	}
 
 	private static File getFileDirectory(String fileName) throws IOException {
@@ -200,72 +137,38 @@ public final class Repository {
 		saveCompanionsRepository();
 		saveExpensesRepository();
 		saveUsersRepository();
-
 	}
 
 	static void saveCardsRepository() {
+		saveRepository(CARDS_REPOSITORY_NAME, cardsRepository);
+	}
+
+	static void saveCategoriesRepository() {
+		saveRepository(CATEGORIES_REPOSITORY_NAME, categoriesRepository);
+	}
+
+	static void saveCompanionsRepository() {
+		saveRepository(COMPANIONS_REPOSITORY_NAME, companionsRepository);
+	}
+
+	static void saveExpensesRepository() {
+		saveRepository(EXPENSES_REPOSITORY_NAME, expensesRepository);
+	}
+
+	static void saveUsersRepository() {
+		saveRepository(USERS_REPOSITORY_NAME, usersRepository);
+	}
+
+	private static <T> void saveRepository(String repositoryName,
+			Map<String, T> repository) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(getFileDirectory(CARDS_REPOSITORY_NAME),
-					cardsRepository);
+			mapper.writeValue(getFileDirectory(repositoryName), repository);
 		} catch (Exception e) {
 			throw new TechnicalException(
 					"There is an isusse, the cards repository could not be saved",
 					e);
 		}
-
-	}
-
-	static void saveCategoriesRepository() {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(getFileDirectory(CATEGORIES_REPOSITORY_NAME),
-					categoriesRepository);
-		} catch (Exception e) {
-			throw new TechnicalException(
-					"There is an isusse, the categories repository could not be saved",
-					e);
-		}
-
-	}
-
-	static void saveCompanionsRepository() {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(getFileDirectory(COMPANIONS_REPOSITORY_NAME),
-					companionsRepository);
-		} catch (Exception e) {
-			throw new TechnicalException(
-					"There is an isusse, the companions repository could not be saved",
-					e);
-		}
-
-	}
-
-	static void saveExpensesRepository() {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(getFileDirectory(EXPENSES_REPOSITORY_NAME),
-					expensesRepository);
-		} catch (Exception e) {
-			throw new TechnicalException(
-					"There is an isusse, the expenses repository could not be saved",
-					e);
-		}
-
-	}
-
-	static void saveUsersRepository() {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(getFileDirectory(USERS_REPOSITORY_NAME),
-					usersRepository);
-		} catch (Exception e) {
-			throw new TechnicalException(
-					"There is an isusse, the users repository could not be saved",
-					e);
-		}
-
 	}
 
 	public static void setPropertiesPath(String path) {
