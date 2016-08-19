@@ -25,10 +25,6 @@ public class CardsValidatorDefaultImpl implements CardsValidator {
 			}
 			break;
 		case UPDATE:
-			if (isCardIdNullOrEmpty(card)) {
-				setInvalidCardReason("Card Id should not be null or empty");
-			}
-			break;
 		case DELETE:
 			if (isCardIdNullOrEmpty(card)) {
 				setInvalidCardReason("Card Id should not be null or empty");
@@ -48,7 +44,7 @@ public class CardsValidatorDefaultImpl implements CardsValidator {
 	}
 
 	private boolean isCardIdNullOrEmpty(Card card) {
-		return card.getCardId() == null || card.getCardId().equals("");
+		return card.getCardId() == null || "".equals(card.getCardId());
 	}
 
 	private boolean isCardNull(Card card) {

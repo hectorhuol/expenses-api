@@ -47,7 +47,7 @@ public class CategoriesGatewayImpl implements CategoriesGateway {
 	}
 
 	private List<Category> getValuesList() {
-		List<Category> values = new ArrayList<Category>(
+		List<Category> values = new ArrayList<>(
 				Repository.categoriesRepository.values());
 		return values;
 	}

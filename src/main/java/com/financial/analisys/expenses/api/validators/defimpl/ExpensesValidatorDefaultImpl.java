@@ -26,10 +26,6 @@ public class ExpensesValidatorDefaultImpl implements ExpensesValidator {
 			}
 			break;
 		case UPDATE:
-			if (isExpenseIdNullOrEmpty(expense)) {
-				setInvalidExpenseReason("Expense Id should not be null or empty");
-			}
-			break;
 		case DELETE:
 			if (isExpenseIdNullOrEmpty(expense)) {
 				setInvalidExpenseReason("Expense Id should not be null or empty");
@@ -50,7 +46,7 @@ public class ExpensesValidatorDefaultImpl implements ExpensesValidator {
 
 	private boolean isExpenseIdNullOrEmpty(Expense expense) {
 		return expense.getExpenseId() == null
-				|| expense.getExpenseId().equals("");
+				|| "".equals(expense.getExpenseId());
 	}
 
 	private boolean isExpenseNull(Expense expense) {

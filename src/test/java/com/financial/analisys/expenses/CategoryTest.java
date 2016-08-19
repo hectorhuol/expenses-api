@@ -49,7 +49,7 @@ public class CategoryTest {
 		category.setCategoryId("1");
 		category.setName("Name");
 
-		List<Category> categories = new ArrayList<Category>();
+		List<Category> categories = new ArrayList<>();
 		categories.add(category);
 
 		ValidationResult validationResult = new ValidationResult();

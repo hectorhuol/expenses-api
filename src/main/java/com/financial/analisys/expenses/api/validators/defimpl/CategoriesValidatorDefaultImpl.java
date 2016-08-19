@@ -26,10 +26,6 @@ public class CategoriesValidatorDefaultImpl implements CategoriesValidator {
 			}
 			break;
 		case UPDATE:
-			if (isCategoryIdNullOrEmpty(category)) {
-				setInvalidCategoryReason("Category Id should not be null or empty");
-			}
-			break;
 		case DELETE:
 			if (isCategoryIdNullOrEmpty(category)) {
 				setInvalidCategoryReason("Category Id should not be null or empty");
@@ -50,7 +46,7 @@ public class CategoriesValidatorDefaultImpl implements CategoriesValidator {
 
 	private boolean isCategoryIdNullOrEmpty(Category category) {
 		return category.getCategoryId() == null
-				|| category.getCategoryId().equals("");
+				|| "".equals(category.getCategoryId());
 	}
 
 	private boolean isCategoryNull(Category category) {

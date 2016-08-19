@@ -46,7 +46,7 @@ public class CardsGatewayImpl implements CardsGateway {
 	}
 
 	private List<Card> getValuesList() {
-		List<Card> values = new ArrayList<Card>(
+		List<Card> values = new ArrayList<>(
 				Repository.cardsRepository.values());
 		return values;
 	}

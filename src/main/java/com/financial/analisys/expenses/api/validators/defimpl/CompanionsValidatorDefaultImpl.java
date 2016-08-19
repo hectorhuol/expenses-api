@@ -26,10 +26,6 @@ public class CompanionsValidatorDefaultImpl implements CompanionsValidator {
 			}
 			break;
 		case UPDATE:
-			if (isCompanionIdNullOrEmpty(companion)) {
-				setInvalidCompanionReason("Companion Id should not be null or empty");
-			}
-			break;
 		case DELETE:
 			if (isCompanionIdNullOrEmpty(companion)) {
 				setInvalidCompanionReason("Companion Id should not be null or empty");
@@ -50,7 +46,7 @@ public class CompanionsValidatorDefaultImpl implements CompanionsValidator {
 
 	private boolean isCompanionIdNullOrEmpty(Companion companion) {
 		return companion.getCompanionId() == null
-				|| companion.getCompanionId().equals("");
+				|| "".equals(companion.getCompanionId());
 	}
 
 	private boolean isCompanionNull(Companion companion) {

@@ -50,7 +50,7 @@ public class CompanionTest {
 		companion.setName("Name");
 		companion.setAlias("Alias");
 
-		List<Companion> companions = new ArrayList<Companion>();
+		List<Companion> companions = new ArrayList<>();
 		companions.add(companion);
 
 		ValidationResult validationResult = new ValidationResult();

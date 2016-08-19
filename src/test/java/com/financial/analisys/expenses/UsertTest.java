@@ -50,7 +50,7 @@ public class UsertTest {
 		user.setUserName("Name");
 		user.setPassword("1234");
 
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 		users.add(user);
 
 		ValidationResult validationResult = new ValidationResult();

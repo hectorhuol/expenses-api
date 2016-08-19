@@ -66,7 +66,7 @@ public class ExpenseTest {
 		user.setUserName("Name");
 		user.setPassword("1234");
 
-		List<Expense> expenses = new ArrayList<Expense>();
+		List<Expense> expenses = new ArrayList<>();
 		expenses.add(expense);
 
 		ValidationResult validationResult = new ValidationResult();

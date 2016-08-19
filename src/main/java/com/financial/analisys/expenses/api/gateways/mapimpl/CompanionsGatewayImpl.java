@@ -48,7 +48,7 @@ public class CompanionsGatewayImpl implements CompanionsGateway {
 	}
 
 	private List<Companion> getValuesList() {
-		List<Companion> values = new ArrayList<Companion>(
+		List<Companion> values = new ArrayList<>(
 				Repository.companionsRepository.values());
 		return values;
 	}

@@ -46,7 +46,7 @@ public class Expense {
 		if (companions != null)
 			return companions;
 		else
-			companions = new ArrayList<Companion>();
+			companions = new ArrayList<>();
 		return companions;
 	}
 

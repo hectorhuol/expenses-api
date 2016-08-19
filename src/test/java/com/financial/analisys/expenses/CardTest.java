@@ -50,7 +50,7 @@ public class CardTest {
 		card.setName("Name");
 		card.setType(CardType.CREDIT);
 
-		List<Card> cards = new ArrayList<Card>();
+		List<Card> cards = new ArrayList<>();
 		cards.add(card);
 
 		ValidationResult validationResult = new ValidationResult();

@@ -46,7 +46,7 @@ public class UsersGatewayImpl implements UsersGateway {
 	}
 
 	private List<User> getValuesList() {
-		List<User> values = new ArrayList<User>(
+		List<User> values = new ArrayList<>(
 				Repository.usersRepository.values());
 		return values;
 	}

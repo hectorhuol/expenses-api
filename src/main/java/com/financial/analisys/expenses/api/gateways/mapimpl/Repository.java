@@ -38,11 +38,11 @@ public final class Repository {
 
 	}
 
-	public static final Map<String, Card> cardsRepository;
-	public static final Map<String, Category> categoriesRepository;
-	public static final Map<String, Companion> companionsRepository;
-	public static final Map<String, Expense> expensesRepository;
-	public static final Map<String, User> usersRepository;
+	protected static final Map<String, Card> cardsRepository;
+	protected static final Map<String, Category> categoriesRepository;
+	protected static final Map<String, Companion> companionsRepository;
+	protected static final Map<String, Expense> expensesRepository;
+	protected static final Map<String, User> usersRepository;
 
 	static {
 		cardsRepository = loadCardsRepository();
@@ -64,7 +64,7 @@ public final class Repository {
 			properties.load(new FileInputStream(new File(PROPERTIES_PATH)));
 			return properties;
 		} catch (Exception e) {
-			return null;
+			throw new TechnicalException(e);
 		}
 	}
 
@@ -98,11 +98,11 @@ public final class Repository {
 					});
 
 			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<String, Card>();
+				return new LinkedHashMap<>();
 			}
 
 		} catch (Exception e) {
-			return new LinkedHashMap<String, Card>();
+			throw new TechnicalException(e);
 		}
 
 		return map;
@@ -118,11 +118,11 @@ public final class Repository {
 					});
 
 			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<String, Category>();
+				return new LinkedHashMap<>();
 			}
 
 		} catch (Exception e) {
-			return new LinkedHashMap<String, Category>();
+			throw new TechnicalException(e);
 		}
 
 		return map;
@@ -138,11 +138,11 @@ public final class Repository {
 					});
 
 			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<String, Companion>();
+				return new LinkedHashMap<>();
 			}
 
 		} catch (Exception e) {
-			return new LinkedHashMap<String, Companion>();
+			throw new TechnicalException(e);
 		}
 
 		return map;
@@ -157,11 +157,11 @@ public final class Repository {
 					});
 
 			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<String, Expense>();
+				return new LinkedHashMap<>();
 			}
 
 		} catch (Exception e) {
-			return new LinkedHashMap<String, Expense>();
+			throw new TechnicalException(e);
 		}
 
 		return map;
@@ -176,11 +176,11 @@ public final class Repository {
 					});
 
 			if (map == null || map.isEmpty()) {
-				return new LinkedHashMap<String, User>();
+				return new LinkedHashMap<>();
 			}
 
 		} catch (Exception e) {
-			return new LinkedHashMap<String, User>();
+			throw new TechnicalException(e);
 		}
 
 		return map;
@@ -222,7 +222,7 @@ public final class Repository {
 			mapper.writeValue(getFileDirectory(CATEGORIES_REPOSITORY_NAME),
 					categoriesRepository);
 		} catch (Exception e) {
-			throw new RuntimeException(
+			throw new TechnicalException(
 					"There is an isusse, the categories repository could not be saved",
 					e);
 		}

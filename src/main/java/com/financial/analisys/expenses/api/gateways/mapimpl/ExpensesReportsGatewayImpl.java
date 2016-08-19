@@ -17,7 +17,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 
 	public List<Expense> getExpensesByCategoryByUser(Category category,
 			User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		values = getValuesList()
 				.stream()
@@ -29,7 +29,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 	}
 
 	public List<Expense> getExpensesByCityByUser(String cityName, User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		for (Expense expense : getValuesList()) {
 			if (isCityEqual(cityName, expense) && isUserEqual(user, expense))
@@ -45,7 +45,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 
 	public List<Expense> getExpensesByCompanionsByUser(
 			List<Companion> companions, User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		for (Expense expense : getValuesList()) {
 			if (hasSomeCompanion(expense.getCompanions(), companions)
@@ -65,7 +65,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 	}
 
 	public List<Expense> getExpensesByMonthByUser(LocalDate month, User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		for (Expense expense : getValuesList()) {
 			if (isMonthEqual(month, expense) && isUserEqual(user, expense))
@@ -81,7 +81,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 	}
 
 	public List<Expense> getExpensesByDayByUser(LocalDate day, User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		for (Expense expense : getValuesList()) {
 			if (isDayEqual(day, expense) && isUserEqual(user, expense))
@@ -98,7 +98,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 
 	public List<Expense> getExpensesBetweenDatesByUser(LocalDateTime startDate,
 			LocalDateTime finishDate, User user) {
-		List<Expense> values = new ArrayList<Expense>();
+		List<Expense> values = new ArrayList<>();
 
 		for (Expense expense : getValuesList()) {
 			if (isDateBetweenStartAndFinishDates(startDate, finishDate, expense)
@@ -122,7 +122,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 	}
 
 	private List<Expense> getValuesList() {
-		List<Expense> values = new ArrayList<Expense>(
+		List<Expense> values = new ArrayList<>(
 				Repository.expensesRepository.values());
 		return values;
 	}

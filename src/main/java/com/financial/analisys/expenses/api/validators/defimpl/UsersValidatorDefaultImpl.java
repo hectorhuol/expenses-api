@@ -25,10 +25,6 @@ public class UsersValidatorDefaultImpl implements UsersValidator {
 			}
 			break;
 		case UPDATE:
-			if (isUserIdNullOrEmpty(user)) {
-				setInvalidUserReason("User Id should not be null or empty");
-			}
-			break;
 		case DELETE:
 			if (isUserIdNullOrEmpty(user)) {
 				setInvalidUserReason("User Id should not be null or empty");
@@ -48,7 +44,7 @@ public class UsersValidatorDefaultImpl implements UsersValidator {
 	}
 
 	private boolean isUserIdNullOrEmpty(User user) {
-		return user.getUserId() == null || user.getUserId().equals("");
+		return user.getUserId() == null || "".equals(user.getUserId());
 	}
 
 	private boolean isUserNull(User user) {
