@@ -18,7 +18,7 @@ public class UsersGatewayImpl implements UsersGateway {
 
 	private String getNextUserId() {
 		List<User> values = getValuesList();
-		if(values==null || values.isEmpty())
+		if (values == null || values.isEmpty())
 			return "1";
 		Integer nextId = Integer.valueOf(values.get(values.size() - 1)
 				.getUserId()) + 1;
@@ -46,9 +46,7 @@ public class UsersGatewayImpl implements UsersGateway {
 	}
 
 	private List<User> getValuesList() {
-		List<User> values = new ArrayList<>(
-				Repository.usersRepository.values());
-		return values;
+		return new ArrayList<>(Repository.usersRepository.values());
 	}
 
 }

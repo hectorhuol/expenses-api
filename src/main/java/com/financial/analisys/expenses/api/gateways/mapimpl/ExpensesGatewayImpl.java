@@ -57,9 +57,7 @@ public class ExpensesGatewayImpl implements ExpensesGateway {
 	}
 
 	private List<Expense> getValuesList() {
-		List<Expense> values = new ArrayList<>(
-				Repository.expensesRepository.values());
-		return values;
+		return new ArrayList<>(Repository.expensesRepository.values());
 	}
 
 }

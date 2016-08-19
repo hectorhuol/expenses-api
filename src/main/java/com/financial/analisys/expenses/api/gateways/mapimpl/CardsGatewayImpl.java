@@ -18,7 +18,7 @@ public class CardsGatewayImpl implements CardsGateway {
 
 	private String getNextCardId() {
 		List<Card> values = getValuesList();
-		if(values==null || values.isEmpty())
+		if (values == null || values.isEmpty())
 			return "1";
 		Integer nextId = Integer.valueOf(values.get(values.size() - 1)
 				.getCardId()) + 1;
@@ -46,9 +46,7 @@ public class CardsGatewayImpl implements CardsGateway {
 	}
 
 	private List<Card> getValuesList() {
-		List<Card> values = new ArrayList<>(
-				Repository.cardsRepository.values());
-		return values;
+		return new ArrayList<>(Repository.cardsRepository.values());
 	}
 
 }

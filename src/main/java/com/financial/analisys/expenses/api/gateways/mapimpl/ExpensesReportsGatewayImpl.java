@@ -24,7 +24,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 				.filter(expense -> expense.getCategory().equals(category)
 						&& expense.getUser().equals(user))
 				.collect(Collectors.toList());
-		
+
 		return values;
 	}
 
@@ -122,9 +122,7 @@ public class ExpensesReportsGatewayImpl implements ExpensesReportsGateway {
 	}
 
 	private List<Expense> getValuesList() {
-		List<Expense> values = new ArrayList<>(
-				Repository.expensesRepository.values());
-		return values;
+		return new ArrayList<>(Repository.expensesRepository.values());
 	}
 
 	private boolean isUserEqual(User user, Expense expense) {

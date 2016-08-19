@@ -18,7 +18,7 @@ public class CategoriesGatewayImpl implements CategoriesGateway {
 
 	private String getNextCategoryId() {
 		List<Category> values = getValuesList();
-		if(values==null || values.isEmpty())
+		if (values == null || values.isEmpty())
 			return "1";
 		Integer nextId = Integer.valueOf(values.get(values.size() - 1)
 				.getCategoryId()) + 1;
@@ -47,9 +47,7 @@ public class CategoriesGatewayImpl implements CategoriesGateway {
 	}
 
 	private List<Category> getValuesList() {
-		List<Category> values = new ArrayList<>(
-				Repository.categoriesRepository.values());
-		return values;
+		return new ArrayList<>(Repository.categoriesRepository.values());
 	}
 
 }

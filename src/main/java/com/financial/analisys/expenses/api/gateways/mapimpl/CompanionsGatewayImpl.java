@@ -17,9 +17,9 @@ public class CompanionsGatewayImpl implements CompanionsGateway {
 		return companion;
 	}
 
-	private String getNextCompanionId() {		
+	private String getNextCompanionId() {
 		List<Companion> values = getValuesList();
-		if(values==null || values.isEmpty())
+		if (values == null || values.isEmpty())
 			return "1";
 		Integer nextId = Integer.valueOf(values.get(values.size() - 1)
 				.getCompanionId()) + 1;
@@ -48,9 +48,7 @@ public class CompanionsGatewayImpl implements CompanionsGateway {
 	}
 
 	private List<Companion> getValuesList() {
-		List<Companion> values = new ArrayList<>(
-				Repository.companionsRepository.values());
-		return values;
+		return new ArrayList<>(Repository.companionsRepository.values());
 	}
 
 }
